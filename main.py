@@ -1,83 +1,83 @@
-# import math
-# import pyowm
-a = 1
-p = 0
-c = 0
+import random
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.gladness = 50
+        self.progress = 0
+        self.alive = True
+        self.glamour = 10
+        self.eat = 100
+    def to_study(self):
+        print("time to study")
+        self.progress +=5
+        self.gladness -=3
+        self.glamour -= 5
+    def to_sleep(self):
+        print("time to sleep")
+        self.gladness +=3
+    def to_chill(self):
+        self.gladness +=5
+        self.progress -= 1
+    def to_shop(self):
+        self.gladness += 10
+        self.progress -= 0.2
+        self.glamour += 10
+    def to_eat(self):
+        self.gladness += 10
+        self.progress -= 0.2
+    def to_work(self):
+        self.gladness -= 0.5
+        self.glamour -= 5
+    def is_alive(self):
+        if self.progress < -2.5:
+            print("Cast out...")
+            self.alive = False
+            print("Fail")
+        elif self.gladness < 0:
+            print("Depression")
+            self.alive = False
+            print("Fail")
+        elif self.progress >25:
+            print("Passed Externally")
+            self.alive = False
+        elif self.glamour > 50:
+            print("Passed Externally, trener fell in love with U")
+            self.alive = False
+        elif self.glamour < 0:
+            print("U suicided")
+            print("Fail")
+            self.alive = False
+        elif self.eat < 5:
+            print("U poor, you are hungry")
+            print("Fail")
+            self.alive = False
 
 
-def start():
-    b = 1
-    while (b == 1):
-        print("vuberete destvie 1) pogoda 2) kalkulator")
-        p = int(input())
-        if (p == 1 or p == 2):
-            b == 0
-            return p
-        else:
-            print("vubirete pravilnoe deystvie")
-            return p
+    def end_of_day(self):
+        print(f"Gladness = {self.gladness}")
+        print(f"Progress = {round(self.progress, 2)}")
+        print(f"Glamour = {self.glamour}")
+        print(f"eat = {self.eat}")
 
+    def live(self, day):
+        day = "Day" + str(day) + 'of'+ self.name+"live"
+        print(f"{day:=^50}")
+        live_cube = random.randint(1,5)
+        if live_cube == 1:
+            self.to_study()
+        elif live_cube == 2:
+            self.to_sleep()
+        elif live_cube == 3:
+            self.to_chill()
+        elif live_cube == 4:
+            self.to_eat()
+        elif live_cube == 5:
+            self.to_shop()
+        self.end_of_day()
+        self.is_alive()
 
-def kalkulator():
-    print("plus-1")
-    print("minus-2")
-    print("umnogut-3")
-    print("podilit-4")
-    print("kvadrat-5")
-    print("korin-6")
-    c = int(input())
-    if (c > 7 and c < 0):
-        print("vuberite predlogunoe deystvie")
-    return c
-
-
-def deystvie(c):
-    r = 0
-    if (c == 1):
-        a = int(input("vedite pervoe chislo"))
-        b = int(input("vedite vtoroe chislo"))
-        print(a + b)
-
-    if (c == 2):
-        a = int(input("vedite pervoe chislo"))
-        b = int(input("vedite vtoroe chislo"))
-        print(a - b)
-
-    if (c == 3):
-        a = int(input("vedite pervoe chislo"))
-        b = int(input("vedite vtoroe chislo"))
-        print(a * b)
-
-    if (c == 4):
-        a = int(input("vedite pervoe chislo"))
-        b = int(input("vedite vtoroe chislo"))
-        print(a / b)
-
-    if (c == 5):
-        a = int(input("vedite pervoe chislo kotoroe vathvesti v kvadrat: "))
-        print(a ** 2)
-
-    # c == 6
-    # a = int(input("vedite pervoe chislo kotorogo vucheslit korin"))
-    # print(str(math.sqrt(a)))
-
-
-def finish():
-    print("1) prodolgut 2)thavershut")
-    x = int(input())
-    if (x >= 3):
-        print("vuberite pravilnoe deistvie")
-
-    if (x == 2):
-        a = 2
-    else:
-        a = 1
-    return a
-
-
-while (a == 1):
-    p = start()
-    if (p == 2):
-        c = kalkulator()
-    deystvie(c)
-    a = finish()
+nick = Student(name="Nick")
+for day in range(365):
+    if nick.alive==False:
+        break
+    nick.live(day)
